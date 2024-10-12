@@ -1,46 +1,15 @@
-use glob::glob;
-use dotenv::dotenv;
-use std::env;
+mod utils;
+use utils::{db,list};
 
-use sqlx::mysql::MySqlPoolOptions;
+fn main() {
+    // List all .wav files //
 
-fn list_file_names() {
+  let _ = list::list_file_names();
 
-    let my_env = env::var("THE_PATH").expect("Path Is Set.");
+    // Set Up Database //
 
-        for entry in glob(&my_env).expect("Files Exist.") {
-            match entry {
-                Ok(path) => {
-                 println!("\nName: {:?}", path.file_name().unwrap());
-                 println!("----------------------------------------")
-                }
-                Err(e) => println!("{:?}", e),
-            }
-        }
+    let _ = db::db();
 }
-
-#[tokio::main]
-async fn main() -> Result<(), sqlx::Error> {
-
-    // List File Names 
-
-    dotenv().ok();
-
-    list_file_names();
-
-    // Setup Database Connection
-
-    let my_database_env = env::var("DATABASE_URL").expect("Database Connected.");
-
-   let _pool = MySqlPoolOptions::new()
-    .max_connections(5)
-    .connect(&my_database_env).await;
-
-    Ok(())
- }
-
- 
-
  
 
 
