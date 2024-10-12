@@ -1,14 +1,23 @@
 mod utils;
 use utils::{db,list};
 
-fn main() {
+fn main() -> Result<(), std::io::Error> {
+  
     // List all .wav files //
 
-  let _ = list::list_file_names();
+    list::list_file_names()?;
 
     // Set Up Database //
 
-    let _ = db::db();
+    let db = db::db();
+
+    match db {
+        Ok(_) => println!("Database Connected Without Issue."),
+        Err(e) => println!("Error Has Occured: {}", e),
+    }
+
+    Ok(())
+
 }
  
 
