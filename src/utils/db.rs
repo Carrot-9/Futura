@@ -1,21 +1,17 @@
-use sqlx::mysql::MySqlPoolOptions;
+use sqlx::MySqlPool;
 
 use std::env;
 use dotenv::dotenv;
 
 
 #[tokio::main]
- pub async fn db() -> Result<(), sqlx::Error> {
+ pub async fn db() -> Result<MySqlPool, sqlx::Error>{
 
     dotenv().ok();
 
-let my_database_env = env::var("DATABASE_URL").expect("Database Connected.");
+let database_url = env::var("DATABASE_URL").unwrap();
 
-let _pool = MySqlPoolOptions::new()
- .max_connections(5)
- .connect(&my_database_env).await?;
+let conn = sqlx::MySqlPool::connect(&database_url).await?;
 
- println!("Pool Is Connected.");
-
- Ok(())
+ Ok(conn)
 }

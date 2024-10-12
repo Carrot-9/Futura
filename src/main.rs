@@ -9,12 +9,12 @@ fn main() -> Result<(), std::io::Error> {
 
     // Set Up Database //
 
-    let db = db::db();
+   let db = db::db();
 
-    match db {
-        Ok(_) => println!("Database Connected Without Issue."),
-        Err(e) => println!("Error Has Occured: {}", e),
-    }
+   match db {
+    Ok(_) => println!("Database Connected Without Issue.\n"),
+    Err(e) => println!("Error Has Occured: {}", e),
+}
 
     Ok(())
 
