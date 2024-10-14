@@ -5,12 +5,6 @@ use std::env;
 use dotenv::dotenv;
 use glob::glob;
 
-struct Songs {
-    id: i32,
-    name: Option<String>,
-    file_path: Option<String>
-}
-
 fn increment( i: &mut i32) {
     *i += 1;
 }
@@ -39,10 +33,11 @@ CREATE TABLE IF NOT EXISTS songs (
  Ok(conn)
 }
 
-pub async fn _get_file_metadata(_conn: Pool<MySql>) -> Result<(), sqlx::Error> {
+pub async fn _insert_into_songs(conn: Pool<MySql>) -> Result<(), sqlx::Error> {
 
     dotenv().ok();
 
+    // n holds increment value of i //
     let mut n:i32 = 0;
     increment(&mut n);
 
@@ -50,14 +45,20 @@ pub async fn _get_file_metadata(_conn: Pool<MySql>) -> Result<(), sqlx::Error> {
 
     for entry in glob(&my_env).expect("Files Exist.") {
         let entry = entry.expect("Unable To Get Entry");
-        let file_path = entry.display();
-        let file_name =  entry.file_name().unwrap();
         let file_id = n;
-        let combined = format!("{:?} {:?} {:?}", file_id, file_name, file_path);
-        println!("{:?}", combined);
-        };
+        let file_name  =  entry.file_name().unwrap().to_str();
+        let file_path  = entry.display().to_string();
+
+        sqlx::query("INSERT INTO songs(id, name, file_path) VALUES(?, ?, ?)")
+            .bind(file_id)
+            .bind(file_name)
+            .bind(file_path)
+            .execute(&conn)
+            .await?;
+    };
 
     Ok(())
+
     }
 
 

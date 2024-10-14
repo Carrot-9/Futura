@@ -15,7 +15,7 @@ fn main() -> Result<(), std::io::Error> {
     Ok(_) => println!("\nDatabase Connected Without Issue...\n"),
     Err(e) => println!("Error Occured Trying To Connect To Database: {}", e),
    }
-
+   
     Ok(())
 
 }
