@@ -9,13 +9,13 @@ pub fn list_file_names() -> io::Result<()> {
 
     let my_env = env::var("THE_PATH").expect("Path Is Set.");
 
+    println!("\nFile List:");
+
         for entry in glob(&my_env).expect("Files Exist.") {
             match entry {
                 Ok(path) => {
-                    println!("\nFile List:");
-                    println!("\n--------------");
                     println!("\nName: {:?}", path.file_name().unwrap());
-                    println!("\n--------------\n")
+                    println!("\n--------------");
                 }
                 Err(e) => println!("{:?}", e),
             }
