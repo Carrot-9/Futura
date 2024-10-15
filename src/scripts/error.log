@@ -1,0 +1,6 @@
+
+Date: 2024-10-15_18:06:14
+
+./alert.sh: line 11: =/tmp/list: No such file or directory
+./alert.sh: line 12: =: command not found
+ls: cannot access 'DIR_PATH': No such file or directory

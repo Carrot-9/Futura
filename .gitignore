@@ -1,2 +1,4 @@
 /target
 .env
+
+debug_output.txt
