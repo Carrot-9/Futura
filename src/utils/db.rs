@@ -1,18 +1,28 @@
-use sqlx::Pool;
-use sqlx::mysql::MySql;
+use sqlx::MySqlPool;
 
 use std::env;
 use dotenv::dotenv;
 use glob::glob;
 
-#[tokio::main]
- pub async fn connect() -> Result<Pool<MySql>, sqlx::Error>{
+pub struct Connection {
+   pub conn: MySqlPool,
+}
 
+pub fn get_database_path() -> String {
     dotenv().ok();
+    let db_path = env::var("DATABASE_URL").expect("Database Path Exists.");
+    return db_path;
+}
 
-let database_url = env::var("DATABASE_URL").unwrap();
+#[tokio::main]
+ pub async fn connect() -> Result<MySqlPool, sqlx::Error>{
 
-let conn = sqlx::MySqlPool::connect(&database_url).await?;
+let database_path = get_database_path();
+
+// Creating Instance of Connection struct //
+let db_connection: Connection = Connection {
+    conn: sqlx::MySqlPool::connect(&database_path).await?,
+};
 
 sqlx::query(
     r#"
@@ -23,13 +33,13 @@ CREATE TABLE IF NOT EXISTS songs (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );"# 
     )
-    .execute(&conn)
+    .execute(&db_connection.conn)
     .await?;
  
- Ok(conn)
+ Ok(db_connection.conn)
 }
 
-pub async fn _insert_into_songs(conn: Pool<MySql>) -> Result<(), sqlx::Error> {
+pub async fn _insert_into_songs(db_connection: Connection) -> Result<MySqlPool, sqlx::Error> {
 
     dotenv().ok();
 
@@ -43,11 +53,11 @@ pub async fn _insert_into_songs(conn: Pool<MySql>) -> Result<(), sqlx::Error> {
         sqlx::query("INSERT INTO songs(name, file_path) VALUES(?, ?)")
             .bind(file_name)
             .bind(file_path)
-            .execute(&conn)
+            .execute(&db_connection.conn)
             .await?;
     };
 
-    Ok(())
+    Ok(db_connection.conn)
 
     }
 
