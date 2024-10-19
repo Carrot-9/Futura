@@ -18,6 +18,7 @@ async fn main() -> Result<(), sqlx::Error>{
     }
 
    // Inserts .wav files into mysql database //
+   
 
     Ok(())
 

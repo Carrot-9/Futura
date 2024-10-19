@@ -5,7 +5,7 @@ use dotenv::dotenv;
 use glob::glob;
 
 pub struct Connection {
-   pub conn: MySqlPool,
+    conn: MySqlPool,
 }
 
 pub fn get_database_path() -> String {
