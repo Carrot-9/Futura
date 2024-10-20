@@ -1,6 +1,6 @@
 # soprano
 
-Grabs any .wav files on my computer, lists them, moves them into a mysql table(songs) and sends them back out to my website, Futura.com.
+List all .wav files on my computer before inserting them into a mysql table where they'll be sent out to my dedicated music website, Futura.com. 
 
-Runs once a week to check for any new .wav files. 
+
 
