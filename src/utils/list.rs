@@ -1,7 +1,6 @@
 use glob::glob;
 use dotenv::dotenv;
-use std::env;
-use std::io;
+use std::{env,io};
 
 pub fn list_file_names() -> io::Result<()> {
 

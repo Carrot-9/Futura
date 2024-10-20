@@ -1,27 +1,24 @@
 mod utils;
-use utils::{db,list};
+use utils::{db, list};
 
 #[tokio::main]
 async fn main() -> Result<(), sqlx::Error>{
-  
-    // List all .wav files //
 
+    // Loads .env file //
+    dotenv::dotenv().ok();
+
+    let pool = db::database().await?;
+
+    // Create 'songs' table if not exists //
+    db::create_table(&pool).await?;
+
+    // Inserts filenames and filepaths into 'songs' table //
+    db::insert_into_songs(&pool).await?;
+
+    // List all .wav files //
     list::list_file_names()?;
 
-    // Set Up Database //
-
-    let database = db::connect();
-
-    match database {
-        Ok(_) => println!("\nDatabase Connected Without Issue."),
-        Err(e) => println!("Error Occured Trying To Connect To Database: {} ", e),
-    }
-
-   // Inserts .wav files into mysql database //
-   
-
     Ok(())
-
 }
  
 
