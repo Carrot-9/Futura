@@ -6,7 +6,8 @@ async fn main() -> Result<(), sqlx::Error>{
 
     // Loads .env file //
     dotenv::dotenv().ok();
-
+    
+    // Initialize database connection //
     let pool = db::database().await?;
 
     // Create 'songs' table if not exists //
@@ -17,7 +18,7 @@ async fn main() -> Result<(), sqlx::Error>{
 
     // List all .wav files //
     list::list_file_names()?;
-
+    
     Ok(())
 }
  

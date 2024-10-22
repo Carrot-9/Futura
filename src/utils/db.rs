@@ -6,6 +6,7 @@ use std::env;
 use glob::glob;
 
 pub async fn database() -> Result<Pool<MySql>, sqlx::Error> {
+
     let database_path = env::var("DATABASE_URL").expect("Database Path Exists.");
     let pool: Pool<MySql> = MySqlPoolOptions::new() 
     .max_connections(5)
@@ -17,8 +18,7 @@ pub async fn database() -> Result<Pool<MySql>, sqlx::Error> {
 
  pub async fn create_table(pool: &MySqlPool) -> Result<(), sqlx::Error>{
 
-sqlx::query(
-    r#"
+    sqlx::query(r#"
 CREATE TABLE IF NOT EXISTS songs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -54,7 +54,3 @@ pub async fn insert_into_songs(pool: &MySqlPool) -> Result<(), sqlx::Error> {
     };
     Ok(())
 }
-
-
-
-
