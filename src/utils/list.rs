@@ -1,4 +1,4 @@
-/* Despite the fact that this list will almost always be discarded via alert.sh, 
+/* Despite the fact that this list will almost always be discarded via main.sh, 
 I still thinks it's useful enough to keep in the codebase
 */
 
