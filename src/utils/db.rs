@@ -7,7 +7,7 @@ use glob::glob;
 
 pub async fn database() -> Result<Pool<MySql>, sqlx::Error> {
 
-    let database_path = env::var("DATABASE_URL").expect("Database Path Exists.");
+    let database_path: String = env::var("DATABASE_URL").expect("Database Path Exists.");
     let pool: Pool<MySql> = MySqlPoolOptions::new() 
     .max_connections(5)
     .connect(&database_path)
@@ -35,13 +35,13 @@ CREATE TABLE IF NOT EXISTS songs (
 
 pub async fn insert_into_songs(pool: &MySqlPool) -> Result<(), sqlx::Error> {
 
-    let my_env = env::var("THE_PATH").expect("Path Is Set.");
+    let my_env: String = env::var("THE_PATH").expect("Path Is Set.");
 
     for entry in glob(&my_env).expect("Files Exist.") {
         match entry {
             Ok(path) => {
-                let file_name  =  path.file_name().unwrap().to_str();
-                let file_path  = path.display().to_string();
+                let file_name: Option<&str>  =  path.file_name().unwrap().to_str();
+                let file_path: String  = path.display().to_string();
 
                 sqlx::query("INSERT INTO songs(name, file_path) VALUES(?, ?)")
                     .bind(file_name)

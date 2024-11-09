@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# alert.sh will be run once a week via Windows Task Scheduler 
+# main.sh will run once a week via cron job
 # If main.rs returns an error, the script sends an error message to database.log and exits unsucessfully 
 # If main.rs runs smoothly, all new .wav files are moved to the table 'songs' in sopranodb
 

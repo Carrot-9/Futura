@@ -1,5 +1,5 @@
 # Soprano
 
-Moves new .wav files to my database once a week. 
+Automatically pushes .wav files to database once a week.
 
-First time using rust.
+Also runs via alias 'soprano'.
