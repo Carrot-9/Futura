@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# main.sh will run once a week via cron job
-# If main.rs returns an error, the script sends an error message to database.log and exits unsucessfully 
-# If main.rs runs smoothly, all new .wav files are moved to the table 'songs' in sopranodb
+# main.sh will run daily at 12:00 PM
 
 # Loads .env variables
-source $ENV > /dev/null 2>&1;
+source "$ENV" > /dev/null 2>&1;
 
 # Variables 
 LOCK_FILE=$(mktemp /tmp/lock.XXXXXX);
@@ -14,31 +12,20 @@ trap 'rm -f "$LOCK_FILE"' EXIT
 current_date=$(date +%F_%T);
 
 # Moves to root directory /soprano so alias can execute outside this directory
-cd $ROOT_DIRECTORY;
+cd "$ROOT_DIRECTORY" || { echo "Error While Trying To Move To Root Directory."; exit 1; };
 
 # Moves to location of rust binary
-cd $BINARY_PATH;
+cd "$BINARY_PATH" || { echo "Error While Trying To Move To Location Of Binary."; exit 1; };
 
-{
+# Executes Rust Binary and moves stdout and stderr to LOCK_FILE
+./soprano.exe > "$LOCK_FILE" 2>&1;
 
-./soprano.exe
-
-} > "$LOCK_FILE" > /dev/null 2>&1;
-
-# Sends to a log to be checked
-if [[ $? -ne 0 ]]; then 
-    cd $ROOT_DIRECTORY;
-    printf "$current_date\n" >> database.log
-    printf "No new .wav files in table 'songs'\n" >> database.log;
+if [[ $? -ne 0 ]]; then
+    cd "$ROOT_DIRECTORY" || { echo "Error While Trying To Move Back To Root Directory."; exit 1; };
+    printf "$current_date\n" >> database_err.log && "$LOCK_FILE"  2>> database_err.log;
+    printf "\nScript Did Not Execute Succesfully.\n";
 else 
-    cd $ROOT_DIRECTORY;
-    printf "$current_date\n" >> database.log
-    printf "New .wav file added to table 'songs'\n" >> database.log;
+    cd "$ROOT_DIRECTORY" || { echo "Error While Trying To Move Back To Root Directory."; exit 1; };
+    printf "$current_date\n" >> database.log && printf "New .wav files added to table 'songs'\n" >> database.log;
+    printf "\nScript Executed Succesfully\n";
 fi
-
-# Indicate Success
-printf "\nScript Executed Succesfully.\n";
-
-
-
-

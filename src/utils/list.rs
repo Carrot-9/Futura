@@ -20,7 +20,7 @@ pub fn list_file_names() -> io::Result<()> {
                     println!("\nName: {:?}", path.file_name().unwrap());
                     println!("\n--------------");
                 }
-                Err(e) => println!("{:?}", e),
+                Err(e) => println!("Error Occured While Trying To List Files:{:?}", e),
             }
         }
     Ok(())

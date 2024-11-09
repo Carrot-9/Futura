@@ -1,5 +1,5 @@
 # Soprano
 
-Automatically pushes .wav files to database once a week.
+Automatically pushes .wav files to database daily at 12:00PM.
 
-Also runs via alias 'soprano'.
+Also works via alias 'soprano'.
