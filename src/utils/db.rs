@@ -42,6 +42,7 @@ pub async fn insert_into_songs(pool: &MySqlPool) -> Result<(), sqlx::Error> {
                let file_name  =  path.file_name().unwrap().to_str();
                let file_path: String  = path.display().to_string();
 
+
                 sqlx::query("INSERT INTO songs(name, file_path) VALUES(?, ?)")
                     .bind(file_name)
                     .bind(file_path)
@@ -57,17 +58,19 @@ pub async fn insert_into_songs(pool: &MySqlPool) -> Result<(), sqlx::Error> {
 pub async fn remove_duplicates(pool: &MySqlPool) -> Result<(), sqlx::Error> {
 
     sqlx::query(r#"
-    
-    DELETE FROM songs
-        WHERE ID NOT IN (
-           SELECT MIN(ID)
-            FROM songs
-            GROUP BY name
-    );"#
-
+     DELETE FROM songs 
+     WHERE id NOT IN (
+     SELECT * FROM(
+     SELECT MIN(id) 
+     FROM songs
+     GROUP BY name, file_path
+     ) AS alias)
+;"#
     )
     .execute(pool)
     .await?;
-
+ 
 Ok(())
 }
+
+

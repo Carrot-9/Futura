@@ -18,7 +18,7 @@ cd "$ROOT_DIRECTORY" || { echo "Error While Trying To Move To Root Directory."; 
 cd "$BINARY_PATH" || { echo "Error While Trying To Move To Location Of Binary."; exit 1; };
 
 # Executes Rust Binary and moves stdout and stderr to LOCK_FILE
-./soprano.exe > "$LOCK_FILE" 2>&1;
+./soprano.exe > "$LOCK_FILE";
 
 if [[ $? -ne 0 ]]; then
     cd "$ROOT_DIRECTORY" || { echo "Error While Trying To Move Back To Root Directory."; exit 1; };
@@ -27,5 +27,5 @@ if [[ $? -ne 0 ]]; then
 else 
     cd "$ROOT_DIRECTORY" || { echo "Error While Trying To Move Back To Root Directory."; exit 1; };
     printf "$current_date\n" >> database.log && printf "New .wav files added to table 'songs'\n" >> database.log;
-    printf "\nScript Executed Succesfully\n";
+    printf "\nScript Executed Succesfully.\n";
 fi

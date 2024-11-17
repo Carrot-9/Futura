@@ -9,7 +9,7 @@ async fn main() -> Result<(), sqlx::Error>{
     
    let db = run_db().await;
    match db {
-        Ok(_) => println!("Database Ran Without Issue."),
+        Ok(_) => println!("\nDatabase Ran Without Issue."),
         Err(e) => eprintln!("Error Occured While Running DB: {}",e),
    };
 
@@ -29,10 +29,11 @@ async fn run_db() -> Result<(), sqlx::Error> {
 
      // Inserts filenames and filepaths into 'songs' table //
      db::insert_into_songs(&pool).await?;
- 
-     // Removes duplicates in 'songs' table
-     db::remove_duplicates(&pool).await?;
 
+     // Removes duplicate columns in table 'songs'
+     db::remove_duplicates(&pool).await?;
+ 
+  
      Ok(())
 
 }
