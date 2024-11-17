@@ -7,5 +7,12 @@ CREATE TABLE IF NOT EXISTS songs (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
+DELETE FROM songs 
+     WHERE id NOT IN (
+     SELECT * FROM(
+     SELECT MIN(id) 
+     FROM songs
+     GROUP BY name, file_path
+     ) AS alias
+);
 
