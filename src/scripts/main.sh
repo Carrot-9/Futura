@@ -26,6 +26,6 @@ if [[ $? -ne 0 ]]; then
     printf "\nScript Did Not Execute Succesfully.\n";
 else 
     cd "$ROOT_DIRECTORY" || { echo "Error While Trying To Move Back To Root Directory."; exit 1; };
-    printf "$current_date\n" >> database.log && printf "New .wav files added to table 'songs'\n" >> database.log;
+    printf "Database Updated On: $current_date\n" >> database.log;
     printf "\nScript Executed Succesfully.\n";
 fi

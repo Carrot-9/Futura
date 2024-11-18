@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS songs (
 
 DELETE FROM songs 
      WHERE id NOT IN (
-     SELECT * FROM(
+     SELECT * FROM (
      SELECT MIN(id) 
      FROM songs
      GROUP BY name, file_path

@@ -72,5 +72,3 @@ pub async fn remove_duplicates(pool: &MySqlPool) -> Result<(), sqlx::Error> {
  
 Ok(())
 }
-
-
