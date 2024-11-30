@@ -8,6 +8,7 @@ async fn main() -> Result<(), sqlx::Error>{
     dotenv::dotenv().ok();
     
    let db = run_db().await;
+   
    match db {
         Ok(_) => println!("\nDatabase Ran Without Issue."),
         Err(e) => eprintln!("Error Occured While Running DB: {}",e),
