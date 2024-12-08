@@ -1,3 +1,12 @@
+// Pushes .wav files to my database 'sopranodb'
+
+// When building this website, I started writing the automation code first,
+// which is why this src is not inside of its own folder.
+// If I were to try to move it into a seperate folder, my environmental variables would break,
+// so I've decided to just leave it as is.
+
+// When looking through this github repo, assume that everything in the root is in it's own seperate directory
+
 mod utils;
 use utils::{db, list};
 

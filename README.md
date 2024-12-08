@@ -1,3 +1,3 @@
 # Soprano
 
-Automatically pushes .wav files to database.
+My dedicated music website written entirely in Rust!
