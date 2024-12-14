@@ -2,7 +2,6 @@
 
 home() {
     printf "\n\nOptions List:\n\n";
-
     printf "Access File List?(0)\n";
     printf "Access Database.log?(1)\n";
     printf "Access Database_err.log?(2)\n";
@@ -19,7 +18,7 @@ home() {
         "3")
             Exit;;
         esac
-    
+            
 }
 
 file_list() {  

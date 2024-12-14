@@ -1,3 +1,3 @@
-# Soprano
+# Futura
 
-My dedicated music website written entirely in Rust!
+A personalized website for my music. 
