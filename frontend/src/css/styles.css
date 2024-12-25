@@ -1,0 +1,11 @@
+html, body {
+  background-color: #C19A6B;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.header {
+  font-family: monospace;
+  color: white;
+}/*# sourceMappingURL=styles.css.map */
