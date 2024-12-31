@@ -1,11 +1,11 @@
-// Pushes .wav files to my database 'sopranodb'
+// Pushes song and sample files to my database 'sopranodb'
 
 // When building this website, I started writing the automation code first,
 // which is why this src is not inside of its own folder.
 // If I were to try to move it into a seperate folder, my environmental variables would break,
 // so I've decided to just leave it as is.
 
-// When looking through this github repo, assume that everything in the root is in it's own seperate directory
+// When looking through this github repo, assume that everything in the root is in it's own seperate, labeled directory
 
 mod utils;
 use utils::{db, list};
@@ -35,7 +35,7 @@ async fn run_db() -> Result<(), sqlx::Error> {
       let pool = db::database().await?;
 
      // Create 'songs' table if not exists //
-     db::create_table(&pool).await?;
+     db::create_tables(&pool).await?;
 
      // Inserts filenames and filepaths into 'songs' table //
      db::insert_into_songs(&pool).await?;
@@ -43,9 +43,7 @@ async fn run_db() -> Result<(), sqlx::Error> {
      // Removes duplicate columns in table 'songs'
      db::remove_duplicates(&pool).await?;
  
-  
      Ok(())
-
 }
  
 

@@ -101,15 +101,13 @@ cd "$BINARY_PATH" || { echo "Error While Trying To Move To Location Of Binary.";
 # Executes Rust Binary and moves stdout and stderr to LOCK_FILE
 ./soprano.exe > "$LOCK_FILE";
 
-if [[ $? -ne 0 ]]; then
-    cd "$ROOT_DIRECTORY" || { echo "Error While Trying To Move Back To Root Directory."; exit 1; };
+cd "$ROOT_DIRECTORY" || { echo "Error While Trying To Move Back To Root Directory."; exit 1; };
 
+if [[ $? -ne 0 ]]; then
     printf "$current_date\n" >> database_err.log && printf "ERROR!:\n\n $LOCK_FILE" 2>> database_err.log;
     printf "\nScript Did Not Execute Succesfully.\n";
     exit 1;
 else 
-    cd "$ROOT_DIRECTORY" || { echo "Error While Trying To Move Back To Root Directory."; exit 1; };
-
     printf "Database Updated On: $current_date\n\n" >> database.log;
     cat "$LOCK_FILE" > filename.txt;
     printf "\nScript Executed Succesfully.\n";
