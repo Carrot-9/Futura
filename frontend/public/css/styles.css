@@ -1,0 +1,49 @@
+body, html {
+  background-color: #BDB5D5;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header {
+  font: monospace;
+  color: #FFFFFF;
+}
+
+.albums {
+  font: monospace;
+  color: #FFFFFF;
+  margin-top: 3%;
+}
+.albums a {
+  text-decoration: none;
+  color: #702963;
+}
+.albums a:hover {
+  color: #483248;
+}
+
+.socials {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  margin-top: 3%;
+}
+.socials a {
+  text-decoration: none;
+  color: #702963;
+}
+.socials a:hover {
+  color: #483248;
+}
+
+.about-me {
+  font: monospace;
+  color: #FFFFFF;
+  margin-top: 3%;
+}
+.about-me .bio {
+  max-width: 200px;
+  line-height: 2;
+  color: #483248;
+}/*# sourceMappingURL=styles.css.map */

@@ -9,6 +9,9 @@ CREATE TABLE IF NOT EXISTS songs (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Duplicates structure of 'songs' table
+CREATE TABLE IF NOT EXISTS samples LIKE songs
+
 -- Deletes any duplicates from the table
 
 DELETE FROM songs 

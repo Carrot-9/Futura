@@ -1,0 +1,62 @@
+// variables
+
+
+
+
+// mixins
+
+@mixin font {
+    font: monospace;
+    color: #FFFFFF;
+}
+
+@mixin links {
+    a {
+        text-decoration: none;
+        color:#702963 ;
+    
+        &:hover {
+            color: #483248;
+        }
+    }
+}
+
+body, html {
+    background-color:#BDB5D5;
+
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.header {
+    @include font;
+}
+
+.albums {
+    @include font;
+    @include links;
+
+    margin-top: 3%;
+}
+
+.socials {
+    @include links;
+
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+
+    margin-top: 3%;
+}
+
+.about-me {
+    @include font;
+    margin-top: 3%;
+
+    .bio {
+        max-width: 200px;
+        line-height: 2;
+        color: #483248;
+    }
+}
