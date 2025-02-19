@@ -5,6 +5,12 @@
 
 // mixins
 
+@mixin column {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+}
+
 @mixin font {
     font: monospace;
     color: #FFFFFF;
@@ -31,21 +37,21 @@ body, html {
 
 .header {
     @include font;
+    font-size: 1.5vw;
 }
 
 .albums {
     @include font;
     @include links;
+    @include column;
 
     margin-top: 3%;
 }
 
 .socials {
+    @include font;
     @include links;
-
-    display: flex;
-    flex-direction: column;
-    line-height: 1.5;
+    @include column;
 
     margin-top: 3%;
 }
@@ -59,4 +65,5 @@ body, html {
         line-height: 2;
         color: #483248;
     }
-}
+} 
+

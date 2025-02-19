@@ -8,11 +8,15 @@ body, html {
 .header {
   font: monospace;
   color: #FFFFFF;
+  font-size: 1.5vw;
 }
 
 .albums {
   font: monospace;
   color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
   margin-top: 3%;
 }
 .albums a {
@@ -24,6 +28,8 @@ body, html {
 }
 
 .socials {
+  font: monospace;
+  color: #FFFFFF;
   display: flex;
   flex-direction: column;
   line-height: 1.5;
