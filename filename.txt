@@ -3,10 +3,22 @@ Database Ran Without Issue.
 
 File List:
 
-Name: "A1.wav"
+Name: "Forest_FreeFinal_Mix.wav"
 
 --------------
 
-Name: "A3.wav"
+Name: "Free_ForestFinal_Mix.wav"
+
+--------------
+
+Name: "Magnuria_l_Final_Mix.wav"
+
+--------------
+
+Name: "The_CallFinal_Mix.wav"
+
+--------------
+
+Name: "rag_and_Manes_l_Final_Mix.wav"
 
 --------------

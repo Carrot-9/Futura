@@ -21,7 +21,7 @@ pub fn list_file_names() -> io::Result<()> {
                 Ok(path) => {
                     let file_name = path.file_name().unwrap().to_str().unwrap();
 
-                    if file_name.contains("sample") || file_name.contains("Sample") == true {continue;};
+                    if file_name.contains("sample") || file_name.contains("Sample") == true {continue;};   
 
                     println!("\nName: {:?}", file_name);
                     println!("\n--------------");
